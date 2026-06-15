@@ -136,6 +136,7 @@ const s = {
     marginBottom: 4,
     gap: 12,
   },
+  lbRowTop: {},
   lbRowMe: {
     background: TAN,
   },
@@ -370,8 +371,14 @@ export default function App() {
                 {row.username}
                 {row.username === currentUser && <span style={s.lbYou}>YOU</span>}
               </span>
-              <span style={s.lbCount}>{row.count}</span>
-              <span style={s.lbSandwich}>🥪</span>
+              <span style={{ whiteSpace: 'nowrap' }}>
+                <span style={s.lbCount}>{row.count}</span>
+                {'  '}
+                <span style={s.lbSandwich}>
+                  {'🥪'.repeat(Math.min(row.count, 20))}
+                  {row.count > 20 && <span style={{ fontSize: 12, color: '#aaa' }}>+{row.count - 20}</span>}
+                </span>
+              </span>
             </div>
           ))}
         </div>

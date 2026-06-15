@@ -82,7 +82,7 @@ const s = {
     color: RED,
     textTransform: 'uppercase',
     letterSpacing: '0.8px',
-    marginBottom: 16,
+    marginBottom: 0,
   },
   // Counter
   counterRow: {
@@ -362,7 +362,13 @@ export default function App() {
 
         {/* Leaderboard */}
         <div style={s.card}>
-          <div style={s.cardTitle}>Leaderboard</div>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
+            <div style={s.cardTitle}>Leaderboard</div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 2, fontSize: 15, fontWeight: 600, color: '#555' }}>
+              Total: <strong style={{ color: '#1a1a1a', fontSize: 16 }}>{leaderboard.reduce((sum, r) => sum + r.count, 0)}</strong>
+              <img src="/sandopic.webp" style={{ width: 36, height: 36, objectFit: 'contain' }} />
+            </div>
+          </div>
           <div style={s.divider} />
           {leaderboard.map((row, i) => (
             <div

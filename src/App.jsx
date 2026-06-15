@@ -352,7 +352,10 @@ export default function App() {
                 disabled={loading}
               >+</button>
             </div>
-            <div style={s.counterLabel}>🥪 sandwiches eaten, {currentUser}</div>
+            <div style={{ ...s.counterLabel, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
+              <img src="/sandopic.webp" style={{ width: 20, height: 20, objectFit: 'contain' }} />
+              sandwiches eaten, {currentUser}
+            </div>
             {error && <div style={{ ...s.error, marginTop: 12, textAlign: 'center' }}>{error}</div>}
           </div>
         )}
@@ -371,13 +374,12 @@ export default function App() {
                 {row.username}
                 {row.username === currentUser && <span style={s.lbYou}>YOU</span>}
               </span>
-              <span style={{ whiteSpace: 'nowrap' }}>
+              <span style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'flex-end' }}>
                 <span style={s.lbCount}>{row.count}</span>
-                {'  '}
-                <span style={s.lbSandwich}>
-                  {'🥪'.repeat(Math.min(row.count, 20))}
-                  {row.count > 20 && <span style={{ fontSize: 12, color: '#aaa' }}>+{row.count - 20}</span>}
-                </span>
+                {Array.from({ length: Math.min(row.count, 20) }).map((_, j) => (
+                  <img key={j} src="/sandopic.webp" style={{ width: 36, height: 36, objectFit: 'contain', marginLeft: j === 0 ? 4 : -10 }} />
+                ))}
+                {row.count > 20 && <span style={{ fontSize: 12, color: '#aaa' }}>+{row.count - 20}</span>}
               </span>
             </div>
           ))}
